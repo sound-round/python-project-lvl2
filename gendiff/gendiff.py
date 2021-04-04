@@ -1,13 +1,10 @@
 import itertools
-import json
-import gendiff.scripts.gendiff
 
 
-def generate_diff():
+def generate_diff(first_file, second_file):
     lines = []
     INDENT = '  '
-    first_file = json.load(open(gendiff.scripts.gendiff.args.first_file))
-    second_file = json.load(open(gendiff.scripts.gendiff.args.second_file))
+
     for key, value in first_file.items():
         if first_file.get(key) == second_file.get(key):
             lines.append(f'{INDENT}  {key}: {value}')
@@ -24,5 +21,6 @@ def generate_diff():
         else:
             lines.append(f'{INDENT}+ {key}: {value}')
 
-    result = itertools.chain('{', lines, '}')
-    return '\n'.join(result)
+    result = '\n'.join(itertools.chain('{', lines, '}'))
+    print(result)
+    return result
