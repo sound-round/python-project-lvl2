@@ -1,10 +1,23 @@
+"""Main module of gendiff-utility"""
+
 import itertools
 import json
 
 
+INDENT = '  '
+
+
 def generate_diff(first_file, second_file):
+    """
+    This function returns difference between first_file and second_file
+
+    Args:
+        first_file: path to the first file,
+
+        second-file: path to the second file.
+
+    """
     lines = []
-    INDENT = '  '
 
     for key, value in sorted(first_file.items()):
         if first_file.get(key) == second_file.get(key):
