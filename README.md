@@ -8,5 +8,10 @@
 [![Actions Status](https://github.com/sound-round/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/sound-round/python-project-lvl2/actions)
 
 ## Visuals
-Demo gendiff on asciinema: 
+Demo gendiff on asciinema with JSON-files: 
+
 [![asciicast](https://asciinema.org/a/9I8ZsgT8LnxECxJzBEfwrWTr4.svg)](https://asciinema.org/a/9I8ZsgT8LnxECxJzBEfwrWTr4)
+
+Demo gendiff on asciinema with YAML-files: 
+
+[![asciicast](https://asciinema.org/a/rsDtBpFh0TFutligAmkCXZYFJ.svg)](https://asciinema.org/a/rsDtBpFh0TFutligAmkCXZYFJ)
