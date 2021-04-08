@@ -3,7 +3,6 @@
 
 import argparse
 from gendiff import gendiff
-import json
 
 
 parser = argparse.ArgumentParser(description='Generate diff')
@@ -14,9 +13,7 @@ args = parser.parse_args()
 
 
 def main():
-    first_file = json.load(open(args.first_file))
-    second_file = json.load(open(args.second_file))
-    gendiff.generate_diff(first_file, second_file)
+    gendiff.generate_diff(args.first_file, args.second_file)
 
 
 if __name__ == '__main__':
