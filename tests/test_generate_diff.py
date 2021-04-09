@@ -12,12 +12,12 @@ def read(file_path):
 
 def test_generate_diff_json():
     assert generate_diff(
-        'tests/fixtures/file1.json',
-        'tests/fixtures/file2.json',
-    ) == str(read('tests/fixtures/result.txt'))
+        'tests/fixtures/file1_plain.json',
+        'tests/fixtures/file2_plain.json',
+    ) == str(read('tests/fixtures/result_plain.txt'))
 
 def test_generate_diff_yaml():
     assert generate_diff(
-        'tests/fixtures/file1.yaml',
-        'tests/fixtures/file2.yaml',
-    ) == str(read('tests/fixtures/result.txt'))
+        'tests/fixtures/file1_plain.yaml',
+        'tests/fixtures/file2_plain.yaml',
+    ) == str(read('tests/fixtures/result_plain.txt'))
