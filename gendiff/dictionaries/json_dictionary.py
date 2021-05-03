@@ -10,6 +10,8 @@ def get_json_value(value):
         int: 'Number',
         float: 'Number',
     }
+    if isinstance(value, dict):
+        return value
     if value in dict_.keys():
         return dict_.get(value)
     return value
