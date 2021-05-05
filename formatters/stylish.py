@@ -1,3 +1,6 @@
+import itertools
+
+
 def format_diff(diff):
     def iter_(diff, depth):
 
