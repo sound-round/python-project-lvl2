@@ -28,6 +28,16 @@ def read(file_path):
         'tests/fixtures/file1_nested.yaml',
         'tests/fixtures/file2_nested.yaml',
         'tests/fixtures/result_nested_stylish.txt',
+    ),
+    (
+        'tests/fixtures/file1_nested.json',
+        'tests/fixtures/file2_nested.json',
+        'tests/fixtures/result_nested_plain.txt',
+    ),
+    (
+        'tests/fixtures/file1_nested.yaml',
+        'tests/fixtures/file2_nested.yaml',
+        'tests/fixtures/result_nested_plain.txt',
     )
 ])
 def test_generate_diff(first_file, second_file, expected_result):
