@@ -10,24 +10,24 @@ def read(file_path):
 
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
-        'tests/fixtures/file1_plain.json',
-        'tests/fixtures/file2_plain.json',
-        'tests/fixtures/result_plain.txt',
+        'tests/fixtures/file1_simple.json',
+        'tests/fixtures/file2_simple.json',
+        'tests/fixtures/result_simple.txt',
     ),
     (
-        'tests/fixtures/file1_plain.yaml',
-        'tests/fixtures/file2_plain.yaml',
-        'tests/fixtures/result_plain.txt',
+        'tests/fixtures/file1_simple.yaml',
+        'tests/fixtures/file2_simple.yaml',
+        'tests/fixtures/result_simple.txt',
     ),
     (
         'tests/fixtures/file1_nested.json',
         'tests/fixtures/file2_nested.json',
-        'tests/fixtures/result_nested.txt',
+        'tests/fixtures/result_nested_stylish.txt',
     ),
     (
         'tests/fixtures/file1_nested.yaml',
         'tests/fixtures/file2_nested.yaml',
-        'tests/fixtures/result_nested.txt',
+        'tests/fixtures/result_nested_stylish.txt',
     )
 ])
 def test_generate_diff(first_file, second_file, expected_result):
