@@ -1,11 +1,21 @@
 import itertools
 
 
+type_ = {
+    'unchanged': ' ',
+    'nested': ' ',
+    'removed': '-',
+    'added': '+',
+}
+
+REPLACER = '    '
+
+
 def format_diff(diff):
     def iter_(diff, depth):
 
-        current_indent = replacer * depth
-        deep_indent = (replacer * (depth + 1))[:-2]
+        current_indent = REPLACER * depth
+        deep_indent = (REPLACER * (depth + 1))[:-2]
         lines = []
         if not isinstance(diff, list):
             if not isinstance(diff, dict):
