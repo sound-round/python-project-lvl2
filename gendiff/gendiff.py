@@ -22,7 +22,9 @@ def convert(file):
     return dump
 
 
-def generate_diff(path_to_first_file, path_to_second_file, formatter=stylish):
+def generate_diff(path_to_first_file,  # noqa: C901
+                  path_to_second_file,
+                  formatter=stylish):
     """
     This function returns difference between first_file and second_file
 
@@ -34,7 +36,6 @@ def generate_diff(path_to_first_file, path_to_second_file, formatter=stylish):
 
     def inner(node1, node2):
 
-
         def walk(node1, node2):
 
             diff = []
@@ -43,7 +44,9 @@ def generate_diff(path_to_first_file, path_to_second_file, formatter=stylish):
             added_keys = node2.keys() - node1.keys()
 
             for key in common_keys:
-                if isinstance(node1[key], dict) and isinstance(node2[key], dict):
+                if isinstance(node1[key], dict) and isinstance(
+                        node2[key], dict
+                ):
                     diff.append({
                         'key': key,
                         'type': 'nested',
