@@ -15,3 +15,8 @@ Demo gendiff on asciinema with JSON-files:
 Demo gendiff on asciinema with YAML-files: 
 
 [![asciicast](https://asciinema.org/a/rsDtBpFh0TFutligAmkCXZYFJ.svg)](https://asciinema.org/a/rsDtBpFh0TFutligAmkCXZYFJ)
+
+Demo gendiff on asciinema with nested JSON-files: 
+
+[![asciicast](https://asciinema.org/a/OsQSqcoERvqMoo49nPH0iRX8M.svg)](https://asciinema.org/a/OsQSqcoERvqMoo49nPH0iRX8M)
+
