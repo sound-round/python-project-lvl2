@@ -5,7 +5,7 @@ import json
 import yaml
 from gendiff.dictionaries.json_dictionary import get_json_value
 from gendiff.dictionaries.yaml_dictionary import get_yaml_value
-from gendiff.formatters import stylish
+from gendiff.formatters import stylish, plain
 
 
 def open_file(file):
@@ -22,9 +22,15 @@ def convert(file):
     return dump
 
 
+FORMATTERS = {
+    'stylish': stylish,
+    'plain': plain,
+}
+
+
 def generate_diff(path_to_first_file,  # noqa: C901
                   path_to_second_file,
-                  formatter=stylish):
+                  format_name):
     """
     This function returns difference between first_file and second_file
 
@@ -83,7 +89,7 @@ def generate_diff(path_to_first_file,  # noqa: C901
             return diff
 
         diff = walk(node1, node2)
-        print(formatter.format_diff(diff))
-        return formatter.format_diff(diff)
+        print(FORMATTERS[format_name].format_diff(diff))
+        return FORMATTERS[format_name].format_diff(diff)
 
     return inner(first_file, second_file)

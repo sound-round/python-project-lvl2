@@ -7,6 +7,7 @@ type_ = {
     'added': '+',
 }
 
+
 REPLACER = '    '
 
 

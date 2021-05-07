@@ -29,6 +29,15 @@ def read(file_path):
         'tests/fixtures/file2_nested.yaml',
         'tests/fixtures/result_nested_stylish.txt',
     ),
+])
+def test_generate_diff_stylish(first_file, second_file, expected_result):
+    assert generate_diff(
+        first_file,
+        second_file,
+        format_name='stylish',
+    ) == str(read(expected_result))
+
+@pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
         'tests/fixtures/file1_nested.json',
         'tests/fixtures/file2_nested.json',
@@ -40,8 +49,9 @@ def read(file_path):
         'tests/fixtures/result_nested_plain.txt',
     )
 ])
-def test_generate_diff(first_file, second_file, expected_result):
+def test_generate_diff_plain(first_file, second_file, expected_result):
     assert generate_diff(
         first_file,
         second_file,
+        format_name='plain',
     ) == str(read(expected_result))
