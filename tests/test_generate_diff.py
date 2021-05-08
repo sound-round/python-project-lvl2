@@ -55,3 +55,22 @@ def test_generate_diff_plain(first_file, second_file, expected_result):
         second_file,
         format_name='plain',
     ) == str(read(expected_result))
+
+@pytest.mark.parametrize('first_file, second_file, expected_result', [
+    (
+        'tests/fixtures/file1_nested.json',
+        'tests/fixtures/file2_nested.json',
+        'tests/fixtures/result_json.json',
+    ),
+    (
+        'tests/fixtures/file1_nested.yaml',
+        'tests/fixtures/file2_nested.yaml',
+        'tests/fixtures/result_json.json',
+    )
+])
+def test_generate_diff_json(first_file, second_file, expected_result):
+    assert generate_diff(
+        first_file,
+        second_file,
+        format_name='json',
+    ) == str(read(expected_result))
