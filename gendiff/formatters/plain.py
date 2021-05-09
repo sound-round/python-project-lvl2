@@ -1,9 +1,6 @@
 from gendiff.formatters import decoder
 
 
-
-
-
 def turn_path_to_str(path):
     return '.'.join(path)
 

@@ -12,7 +12,6 @@ def open_file(file):
     return yaml.load(open(file), Loader=yaml.FullLoader)
 
 
-
 FORMATTERS = {
     'stylish': stylish,
     'plain': plain,
@@ -30,7 +29,6 @@ def generate_diff(path_to_first_file,  # noqa: C901
 
     first_file = open_file(path_to_first_file)
     second_file = open_file(path_to_second_file)
-    #convert_value = convert(path_to_first_file)
 
     def inner(node1, node2):
 

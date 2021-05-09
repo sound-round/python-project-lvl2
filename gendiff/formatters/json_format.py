@@ -1,5 +1,6 @@
 import json
 
+
 def sort(diff):
     diff.sort(key=lambda node: node['key'])
     for node in diff:
