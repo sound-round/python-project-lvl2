@@ -1,4 +1,6 @@
 import itertools
+from gendiff.formatters import decoder
+
 
 type_ = {
     'unchanged': ' ',
@@ -39,20 +41,20 @@ def format_diff(diff):  # noqa: C901
                         deep_indent,
                         type_['removed'],
                         string['key'],
-                        iter_(string['old_value'], depth + 1)
+                        iter_(decoder.decode_value_stylish(string['old_value']), depth + 1)
                     ))
                     lines.append('{}{} {}: {}'.format(
                         deep_indent,
                         type_['added'],
                         string['key'],
-                        iter_(string['new_value'], depth + 1)
+                        iter_(decoder.decode_value_stylish(string['new_value']), depth + 1)
                     ))
                 else:
                     lines.append('{}{} {}: {}'.format(
                         deep_indent,
                         type_[string['type']],
                         string['key'],
-                        iter_(string['value'], depth + 1)
+                        iter_(decoder.decode_value_stylish(string['value']), depth + 1)
                     ))
 
         formated_diff = itertools.chain("{", lines, [current_indent + "}"])

@@ -1,16 +1,11 @@
-BOOL = ['null', 'false', 'true']
+from gendiff.formatters import decoder
+
+
+
 
 
 def turn_path_to_str(path):
     return '.'.join(path)
-
-
-def convert_value(value):
-    if isinstance(value, dict):
-        return '[complex value]'
-    if isinstance(value, str) and value not in BOOL:
-        return "'{}'".format(value)
-    return value
 
 
 def format_diff(diff):  # noqa: C901
@@ -35,7 +30,7 @@ def format_diff(diff):  # noqa: C901
                 result.append(
                     "Property '{}' was added with value: {}".format(
                         turn_path_to_str(path),
-                        convert_value(node['value'])
+                        decoder.decode_value_plain(node['value'])
                     )
                 )
                 path.pop()
@@ -44,8 +39,8 @@ def format_diff(diff):  # noqa: C901
                 result.append(
                     "Property '{}' was updated. From {} to {}".format(
                         turn_path_to_str(path),
-                        convert_value(node['old_value']),
-                        convert_value(node['new_value'])
+                        decoder.decode_value_plain(node['old_value']),
+                        decoder.decode_value_plain(node['new_value'])
                     )
                 )
                 path.pop()
