@@ -6,7 +6,7 @@ def turn_path_to_str(path):
 
 
 def format_diff(diff):  # noqa: C901
-    result = []
+    lines = []
     path = []
 
     def walk(diff):
@@ -18,13 +18,13 @@ def format_diff(diff):  # noqa: C901
                 path.pop()
             elif node['type'] == 'removed':
                 path.append(node['key'])
-                result.append(
+                lines.append(
                     "Property '{}' was removed".format(turn_path_to_str(path))
                 )
                 path.pop()
             elif node['type'] == 'added':
                 path.append(node['key'])
-                result.append(
+                lines.append(
                     "Property '{}' was added with value: {}".format(
                         turn_path_to_str(path),
                         decoder.decode_value_plain(node['value'])
@@ -33,7 +33,7 @@ def format_diff(diff):  # noqa: C901
                 path.pop()
             elif node['type'] == 'changed':
                 path.append(node['key'])
-                result.append(
+                lines.append(
                     "Property '{}' was updated. From {} to {}".format(
                         turn_path_to_str(path),
                         decoder.decode_value_plain(node['old_value']),
@@ -42,6 +42,6 @@ def format_diff(diff):  # noqa: C901
                 )
                 path.pop()
 
-        return '\n'.join(sorted(result))
+        return '\n'.join(sorted(lines))
 
     return walk(diff)
