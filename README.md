@@ -16,7 +16,24 @@ Utility features:
 - Generating a report in plain text, stylish, and json format.
 
 ## Visuals
-Demo gendiff on asciinema: 
+
+Demo gendiff on asciinema with JSON-files: 
+
+[![asciicast](https://asciinema.org/a/9I8ZsgT8LnxECxJzBEfwrWTr4.svg)](https://asciinema.org/a/9I8ZsgT8LnxECxJzBEfwrWTr4)
+
+Demo gendiff on asciinema with YAML-files: 
+
+[![asciicast](https://asciinema.org/a/rsDtBpFh0TFutligAmkCXZYFJ.svg)](https://asciinema.org/a/rsDtBpFh0TFutligAmkCXZYFJ)
+
+Demo gendiff on asciinema with nested files: 
+
+[![asciicast](https://asciinema.org/a/OsQSqcoERvqMoo49nPH0iRX8M.svg)](https://asciinema.org/a/OsQSqcoERvqMoo49nPH0iRX8M)
+
+Demo gendiff on asciinema with plain-format:
+
+[![asciicast](https://asciinema.org/a/b8a9A5jvxQRiX0jNMAQJF0Xjq.svg)](https://asciinema.org/a/b8a9A5jvxQRiX0jNMAQJF0Xjq)
+
+Final demo gendiff on asciinema: 
 
 [![asciicast](https://asciinema.org/a/H7B6zgyNqVCS78oPnfzfe6nX3.svg)](https://asciinema.org/a/H7B6zgyNqVCS78oPnfzfe6nX3)
 
