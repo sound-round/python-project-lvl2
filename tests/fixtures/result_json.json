@@ -4,20 +4,42 @@
         "type": "nested",
         "children": [
             {
+                "key": "follow",
+                "type": "added",
+                "value": false
+            },
+            {
+                "key": "setting1",
+                "type": "unchanged",
+                "value": "Value 1"
+            },
+            {
+                "key": "setting2",
+                "type": "removed",
+                "value": 200
+            },
+            {
                 "key": "setting3",
                 "type": "changed",
                 "old_value": true,
                 "new_value": null
             },
             {
+                "key": "setting4",
+                "type": "added",
+                "value": "blah blah"
+            },
+            {
+                "key": "setting5",
+                "type": "added",
+                "value": {
+                    "key5": "value5"
+                }
+            },
+            {
                 "key": "setting6",
                 "type": "nested",
                 "children": [
-                    {
-                        "key": "key",
-                        "type": "unchanged",
-                        "value": "value"
-                    },
                     {
                         "key": "doge",
                         "type": "nested",
@@ -31,38 +53,16 @@
                         ]
                     },
                     {
+                        "key": "key",
+                        "type": "unchanged",
+                        "value": "value"
+                    },
+                    {
                         "key": "ops",
                         "type": "added",
                         "value": "vops"
                     }
                 ]
-            },
-            {
-                "key": "setting1",
-                "type": "unchanged",
-                "value": "Value 1"
-            },
-            {
-                "key": "setting2",
-                "type": "removed",
-                "value": 200
-            },
-            {
-                "key": "setting5",
-                "type": "added",
-                "value": {
-                    "key5": "value5"
-                }
-            },
-            {
-                "key": "follow",
-                "type": "added",
-                "value": false
-            },
-            {
-                "key": "setting4",
-                "type": "added",
-                "value": "blah blah"
             }
         ]
     },
@@ -71,12 +71,10 @@
         "type": "nested",
         "children": [
             {
-                "key": "nest",
+                "key": "baz",
                 "type": "changed",
-                "old_value": {
-                    "key": "value"
-                },
-                "new_value": "str"
+                "old_value": "bas",
+                "new_value": "bars"
             },
             {
                 "key": "foo",
@@ -84,10 +82,12 @@
                 "value": "bar"
             },
             {
-                "key": "baz",
+                "key": "nest",
                 "type": "changed",
-                "old_value": "bas",
-                "new_value": "bars"
+                "old_value": {
+                    "key": "value"
+                },
+                "new_value": "str"
             }
         ]
     },

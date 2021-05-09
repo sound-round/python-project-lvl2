@@ -3,9 +3,7 @@
 
 import json
 import yaml
-from gendiff.dictionaries.json_dictionary import get_json_value
-from gendiff.dictionaries.yaml_dictionary import get_yaml_value
-from gendiff.formatters import stylish, plain
+from gendiff.formatters import stylish, plain, json_format
 
 
 def open_file(file):
@@ -14,17 +12,11 @@ def open_file(file):
     return yaml.load(open(file), Loader=yaml.FullLoader)
 
 
-def convert(file):
-    def dump(value):
-        if file.endswith('json'):
-            return get_json_value(value)
-        return get_yaml_value(value)
-    return dump
-
 
 FORMATTERS = {
     'stylish': stylish,
     'plain': plain,
+    'json': json_format,
 }
 
 
@@ -38,7 +30,7 @@ def generate_diff(path_to_first_file,  # noqa: C901
 
     first_file = open_file(path_to_first_file)
     second_file = open_file(path_to_second_file)
-    convert_value = convert(path_to_first_file)
+    #convert_value = convert(path_to_first_file)
 
     def inner(node1, node2):
 
@@ -63,28 +55,28 @@ def generate_diff(path_to_first_file,  # noqa: C901
                         diff.append({
                             'key': key,
                             'type': 'unchanged',
-                            'value': convert_value(node1[key]),
+                            'value': node1[key],
                         })
                     else:
                         diff.append({
                             'key': key,
                             'type': 'changed',
-                            'old_value': convert_value(node1[key]),
-                            'new_value': convert_value(node2[key]),
+                            'old_value': node1[key],
+                            'new_value': node2[key],
                         })
 
             for key in removed_keys:
                 diff.append({
                     'key': key,
                     'type': 'removed',
-                    'value': convert_value(node1[key]),
+                    'value': node1[key],
                 })
 
             for key in added_keys:
                 diff.append({
                     'key': key,
                     'type': 'added',
-                    'value': convert_value(node2[key]),
+                    'value': node2[key],
                 })
             return diff
 
