@@ -1,1 +1,1 @@
-from . import gendiff
+from . import gendiff  # noqa:  F401
