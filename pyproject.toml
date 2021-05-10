@@ -1,11 +1,22 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "gendiff — a program that determines the difference between two data structures"
 authors = ["denis <yudaev1@gmail.com>"]
 packages = [
   { include = "gendiff" },
 ]
+
+repository = "https://github.com/sound-round/python-project-lvl2.git"
+readme = "README.md"
+keywords = [
+    "Python",
+    "Education",
+    "yaml",
+    "json",
+    "Hexlet"
+]
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.8"
