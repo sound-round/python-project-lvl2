@@ -1,1 +1,1 @@
-__all__ = ('gendiff',)
+from . import gendiff
