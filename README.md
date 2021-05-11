@@ -1,7 +1,7 @@
 # gendiff
 
 ## Badges
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/sound-round/python-project-lvl2/maintainability)
 [![Github Actions Status](https://github.com/sound-round/python-project-lvl2/workflows/linter/badge.svg)](https://github.com/sound-round/python-project-lvl2/actions)
 [![Github Actions Status](https://github.com/sound-round/python-project-lvl2/workflows/tests/badge.svg)](https://github.com/sound-round/python-project-lvl2/actions)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/aca4a90a1b44065aa4cb/test_coverage)](https://codeclimate.com/github/sound-round/python-project-lvl2/test_coverage)
