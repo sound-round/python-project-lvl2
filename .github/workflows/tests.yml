@@ -20,11 +20,11 @@ jobs:
       run: |
         pip install poetry
         make install
-    - name: tests
+    - name: run tests
       run: |
         make test
     - uses: paambaati/codeclimate-action@v2.7.5
       env:
-        CC_TEST_REPORTER_ID: 66c770d8749085821a8c27fc51987806212504e0198166cc83490e6fad357fa8
+        CC_TEST_REPORTER_ID: ${{ secrets.CODECLIMATE_KEY }}
       with:
         coverageCommand: make test-coverage
