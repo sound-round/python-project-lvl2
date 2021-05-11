@@ -1,5 +1,6 @@
 from gendiff.gendiff import generate_diff
 import pytest
+import os
 
 
 def read(file_path):
@@ -8,11 +9,21 @@ def read(file_path):
     return file
 
 
+def get_fixture_path(fixture_name):
+    for root, _, files in os.walk(cwd):
+        for name in files:
+            if name == fixture_name:
+                return os.path.abspath(os.path.join(root, name))
+
+
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
-        'tests/fixtures/nested/file1_nested.json',
-        'tests/fixtures/nested/file2_nested.json',
-        'tests/fixtures/result_nested_stylish.txt',
+        #'tests/fixtures/nested/file1_nested.json',
+        #'tests/fixtures/nested/file2_nested.json',
+        get_fixture_path(('file1_nested.json')),
+        get_fixture_path(('file2_nested.json')),
+        #'tests/fixtures/result_nested_stylish.txt',
+        get_fixture_path(('result_nested_stylish.txt'))
     ),
     (
         'tests/fixtures/nested/file1_nested.yaml',
