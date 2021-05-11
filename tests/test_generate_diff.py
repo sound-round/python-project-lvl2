@@ -37,6 +37,7 @@ def test_generate_diff_stylish(first_file, second_file, expected_result):
         format_name='stylish',
     ) == str(read(expected_result))
 
+
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
         'tests/fixtures/nested/file1_nested.json',
@@ -55,6 +56,7 @@ def test_generate_diff_plain(first_file, second_file, expected_result):
         second_file,
         format_name='plain',
     ) == str(read(expected_result))
+
 
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
