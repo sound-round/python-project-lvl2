@@ -21,7 +21,7 @@ def open_file(file):
 
 def generate_diff(path_to_first_file,  # noqa: C901
                   path_to_second_file,
-                  format_name):
+                  format_name='stylish'):
     """
     This function returns difference between first_file and second_file,
     in different formats (stylish, plain, json).
