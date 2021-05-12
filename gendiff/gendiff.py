@@ -6,7 +6,7 @@ import yaml
 from gendiff.formatters import stylish_format, plain_format, json_format
 
 
-FORMATTERS = {
+FORMATTERS = { # перенести в formatters
     'stylish': stylish_format,
     'plain': plain_format,
     'json': json_format,
@@ -78,5 +78,4 @@ def generate_diff(path_to_first_file,  # noqa: C901
         return diff
 
     diff = walk(first_file, second_file)
-    print(FORMATTERS[format_name].format_diff(diff))
     return FORMATTERS[format_name].format_diff(diff)

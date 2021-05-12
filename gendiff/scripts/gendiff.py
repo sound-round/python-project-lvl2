@@ -1,25 +1,15 @@
 #!/usr/bin/env python3
 
 
-import argparse
 from gendiff import gendiff
-
-
-parser = argparse.ArgumentParser(description='Generate diff')
-parser.add_argument('first_file')
-parser.add_argument('second_file')
-parser.add_argument(
-    '-f', '--format',
-    default='stylish',
-    choices=['stylish', 'plain', 'json'],
-    help='set format of output (default: "stylish")',
-)
-args = parser.parse_args()
+from gendiff.parser import parse
 
 
 def main():
-    gendiff.generate_diff(args.first_file, args.second_file, args.format)
-
+    parser = parse()
+    args = parser.parse_args()
+    diff = gendiff.generate_diff(args.first_file, args.second_file, args.format)
+    print(diff)
 
 if __name__ == '__main__':
     main()
