@@ -1,21 +1,8 @@
 """Main module of gendiff-utility"""
 
 
-from gendiff.formatters import stylish_format, plain_format, json_format
 from gendiff import parser
-
-
-FORMATTERS = { # перенести в formatters
-    'stylish': stylish_format,
-    'plain': plain_format,
-    'json': json_format,
-}
-
-
-#def open_file(file):
-    #if file.endswith('json'):
-       # return json.load(open(file))
-    #return yaml.load(open(file), Loader=yaml.FullLoader)
+from gendiff.formatters import formatters
 
 
 def generate_diff(path_to_first_file,  # noqa: C901
@@ -78,4 +65,4 @@ def generate_diff(path_to_first_file,  # noqa: C901
         return diff
 
     diff = walk(first_file, second_file)
-    return FORMATTERS[format_name].format_diff(diff)
+    return formatters.map_formatters[format_name].format_diff(diff)
