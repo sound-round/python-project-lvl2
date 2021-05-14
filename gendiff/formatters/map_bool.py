@@ -1,4 +1,4 @@
-map_bool_python_to_json = {
+map_bool = {
     True: 'true',
     False: 'false',
     None: 'null',
@@ -10,8 +10,8 @@ def decode_value_stylish(value):
         return value
     if isinstance(value, dict):
         return value
-    if value in map_bool_python_to_json.keys():
-        return map_bool_python_to_json[value]
+    if value in map_bool.keys():
+        return map_bool[value]
     return value
 
 
@@ -20,8 +20,8 @@ def decode_value_plain(value):
         return value
     if isinstance(value, dict):
         return '[complex value]'
-    if value in map_bool_python_to_json.keys():
-        return map_bool_python_to_json[value]
+    if value in map_bool.keys():
+        return map_bool[value]
     if isinstance(value, str):
         return "'{}'".format(value)
     return value

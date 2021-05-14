@@ -1,9 +1,8 @@
 """Main module of gendiff-utility"""
 
 
-import json
-import yaml
 from gendiff.formatters import stylish_format, plain_format, json_format
+from gendiff import parser
 
 
 FORMATTERS = { # перенести в formatters
@@ -13,10 +12,10 @@ FORMATTERS = { # перенести в formatters
 }
 
 
-def open_file(file):
-    if file.endswith('json'):
-        return json.load(open(file))
-    return yaml.load(open(file), Loader=yaml.FullLoader)
+#def open_file(file):
+    #if file.endswith('json'):
+       # return json.load(open(file))
+    #return yaml.load(open(file), Loader=yaml.FullLoader)
 
 
 def generate_diff(path_to_first_file,  # noqa: C901
@@ -27,9 +26,10 @@ def generate_diff(path_to_first_file,  # noqa: C901
     in different formats (stylish, plain, json).
 
     """
-
-    first_file = open_file(path_to_first_file)
-    second_file = open_file(path_to_second_file)
+    first_file_parser = parser.parse_file(path_to_first_file)
+    second_file_parser = parser.parse_file(path_to_second_file)
+    first_file = first_file_parser(open(path_to_first_file))
+    second_file = second_file_parser(open(path_to_second_file))
 
     def walk(node1, node2):
 
