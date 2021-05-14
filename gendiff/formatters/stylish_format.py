@@ -1,5 +1,5 @@
 import itertools
-from gendiff.formatters import decoder
+from gendiff.formatters.map_bool import map_bool
 
 
 REPLACER = '    '
@@ -9,6 +9,16 @@ map_type_to_sign = {
     'removed': '-',
     'added': '+',
 }
+
+
+def decode_value(value):
+    if str(value) == '0':
+        return value
+    if isinstance(value, dict):
+        return value
+    if value in map_bool.keys():
+        return map_bool[value]
+    return value
 
 
 def format_diff(diff):  # noqa: C901
@@ -40,7 +50,7 @@ def format_diff(diff):  # noqa: C901
                         map_type_to_sign['removed'],
                         string['key'],
                         iter_(
-                            decoder.decode_value_stylish(string['old_value']),
+                            decode_value(string['old_value']),
                             depth + 1,
                         )
                     ))
@@ -49,7 +59,7 @@ def format_diff(diff):  # noqa: C901
                         map_type_to_sign['added'],
                         string['key'],
                         iter_(
-                            decoder.decode_value_stylish(string['new_value']),
+                            decode_value(string['new_value']),
                             depth + 1,
                         )
                     ))
@@ -59,7 +69,7 @@ def format_diff(diff):  # noqa: C901
                         map_type_to_sign[string['type']],
                         string['key'],
                         iter_(
-                            decoder.decode_value_stylish(string['value']),
+                            decode_value(string['value']),
                             depth + 1
                         )
                     ))
