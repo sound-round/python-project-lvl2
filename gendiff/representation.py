@@ -17,20 +17,20 @@ def generate(node1, node2):
                 'type': 'nested',
                 'children': generate(node1[key], node2[key]),
             })
+
+        elif node1[key] == node2[key]:
+            diff.append({
+                'key': key,
+                'type': 'unchanged',
+                'value': node1[key],
+            })
         else:
-            if node1[key] == node2[key]:
-                diff.append({
-                    'key': key,
-                    'type': 'unchanged',
-                    'value': node1[key],
-                })
-            else:
-                diff.append({
-                    'key': key,
-                    'type': 'changed',
-                    'old_value': node1[key],
-                    'new_value': node2[key],
-                })
+            diff.append({
+                'key': key,
+                'type': 'changed',
+                'old_value': node1[key],
+                'new_value': node2[key],
+            })
 
     for key in removed_keys:
         diff.append({
