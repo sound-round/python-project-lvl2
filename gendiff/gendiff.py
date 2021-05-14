@@ -3,9 +3,10 @@
 
 from gendiff import parser
 from gendiff.formatters import formatters
+from gendiff import representation
 
 
-def generate_diff(path_to_first_file,  # noqa: C901
+def generate_diff(path_to_first_file,
                   path_to_second_file,
                   format_name='stylish'):
     """
@@ -18,51 +19,5 @@ def generate_diff(path_to_first_file,  # noqa: C901
     first_file = first_file_parser(open(path_to_first_file))
     second_file = second_file_parser(open(path_to_second_file))
 
-    def walk(node1, node2):
-
-        diff = []
-        common_keys = node1.keys() & node2.keys()
-        removed_keys = node1.keys() - node2.keys()
-        added_keys = node2.keys() - node1.keys()
-
-        for key in common_keys:
-            if isinstance(node1[key], dict) and isinstance(
-                    node2[key], dict
-            ):
-                diff.append({
-                    'key': key,
-                    'type': 'nested',
-                    'children': walk(node1[key], node2[key]),
-                })
-            else:
-                if node1[key] == node2[key]:
-                    diff.append({
-                        'key': key,
-                        'type': 'unchanged',
-                        'value': node1[key],
-                    })
-                else:
-                    diff.append({
-                        'key': key,
-                        'type': 'changed',
-                        'old_value': node1[key],
-                        'new_value': node2[key],
-                    })
-
-        for key in removed_keys:
-            diff.append({
-                'key': key,
-                'type': 'removed',
-                'value': node1[key],
-            })
-
-        for key in added_keys:
-            diff.append({
-                'key': key,
-                'type': 'added',
-                'value': node2[key],
-            })
-        return diff
-
-    diff = walk(first_file, second_file)
+    diff = representation.generate(first_file, second_file)
     return formatters.map_formatters[format_name].format_diff(diff)
