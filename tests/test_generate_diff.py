@@ -3,6 +3,9 @@ import pytest
 import os
 
 
+FORMATTERS = ['stylish', 'plain']
+
+
 def read(file_path):
     with open(file_path, 'r') as f:
         file = f.read()
@@ -20,12 +23,12 @@ def get_fixture_path(fixture_name):
     (
         get_fixture_path(('file1_nested.json')),
         get_fixture_path(('file2_nested.json')),
-        get_fixture_path(('result_nested_stylish.txt')),
+        get_fixture_path(('result_stylish.txt')),
     ),
     (
         get_fixture_path(('file1_nested.yaml')),
         get_fixture_path(('file2_nested.yaml')),
-        get_fixture_path(('result_nested_stylish.txt')),
+        get_fixture_path(('result_stylish.txt')),
     ),
 ])
 def test_generate_diff_default(first_file, second_file, expected_result):
@@ -35,44 +38,24 @@ def test_generate_diff_default(first_file, second_file, expected_result):
     ) == read(expected_result)
 
 
-@pytest.mark.parametrize('first_file, second_file, expected_result', [
+@pytest.mark.parametrize('first_file, second_file', [
     (
         get_fixture_path(('file1_nested.json')),
         get_fixture_path(('file2_nested.json')),
-        get_fixture_path(('result_nested_stylish.txt')),
     ),
     (
         get_fixture_path(('file1_nested.yaml')),
         get_fixture_path(('file2_nested.yaml')),
-        get_fixture_path(('result_nested_stylish.txt')),
     ),
 ])
-def test_generate_diff_stylish(first_file, second_file, expected_result):
-    assert generate_diff(
-        first_file,
-        second_file,
-        format_name='stylish',
-    ) == read(expected_result)
-
-
-@pytest.mark.parametrize('first_file, second_file, expected_result', [
-    (
-        get_fixture_path(('file1_nested.json')),
-        get_fixture_path(('file2_nested.json')),
-        get_fixture_path(('result_nested_plain.txt')),
-    ),
-    (
-        get_fixture_path(('file1_nested.yaml')),
-        get_fixture_path(('file2_nested.yaml')),
-        get_fixture_path(('result_nested_plain.txt')),
-    )
-])
-def test_generate_diff_plain(first_file, second_file, expected_result):
-    assert generate_diff(
-        first_file,
-        second_file,
-        format_name='plain',
-    ) == read(expected_result)
+def test_generate_diff(first_file, second_file):
+    for formatter in FORMATTERS:
+        expected_result = get_fixture_path('result_{}.txt'.format(formatter))
+        assert generate_diff(
+            first_file,
+            second_file,
+            format_name='{}'.format(formatter),
+        ) == read(expected_result)
 
 
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
