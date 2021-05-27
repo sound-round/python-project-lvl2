@@ -3,7 +3,7 @@
 
 from gendiff import cli_args
 from gendiff.formatters import formatters
-from gendiff import representation
+from gendiff import tree
 
 
 def generate_diff(path_to_first_file,
@@ -19,5 +19,5 @@ def generate_diff(path_to_first_file,
     first_file = first_file_parser(open(path_to_first_file))
     second_file = second_file_parser(open(path_to_second_file))
 
-    diff = representation.generate(first_file, second_file)
+    diff = tree.build_diff(first_file, second_file)
     return formatters.map_formatters[format_name].format_diff(diff)

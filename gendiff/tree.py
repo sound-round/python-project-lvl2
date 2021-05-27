@@ -1,7 +1,7 @@
 """Main module of gendiff-utility"""
 
 
-def generate(node1, node2):
+def build_diff(node1, node2):
 
     diff = []
     all_keys = node1.keys() | node2.keys()
@@ -16,7 +16,7 @@ def generate(node1, node2):
                 diff.append({
                     'key': key,
                     'type': 'nested',
-                    'children': generate(node1[key], node2[key]),
+                    'children': build_diff(node1[key], node2[key]),
                 })
 
             elif node1[key] == node2[key]:
