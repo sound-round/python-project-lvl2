@@ -3,7 +3,7 @@ import pytest
 import os
 
 
-FORMATTERS = ['stylish', 'plain']
+FORMATS = ['stylish', 'plain']
 
 
 def read(file_path):
@@ -49,12 +49,12 @@ def test_generate_diff_default(first_file, second_file, expected_result):
     ),
 ])
 def test_generate_diff(first_file, second_file):
-    for formatter in FORMATTERS:
-        expected_result = get_fixture_path('result_{}.txt'.format(formatter))
+    for format in FORMATS:
+        expected_result = get_fixture_path('result_{}.txt'.format(format))
         assert generate_diff(
             first_file,
             second_file,
-            format_name='{}'.format(formatter),
+            format_name='{}'.format(format),
         ) == read(expected_result)
 
 
