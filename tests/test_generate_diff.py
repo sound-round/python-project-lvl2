@@ -1,4 +1,4 @@
-from gendiff.gendiff import generate_diff
+from gendiff.generator import generate_diff
 import pytest
 import os
 
@@ -54,5 +54,5 @@ def test_generate_diff_formats(first_file, second_file):
         assert generate_diff(
             first_file,
             second_file,
-            format_name='{}'.format(format),
+            format='{}'.format(format),
         ) == read(expected_result)
