@@ -21,13 +21,13 @@ def get_fixture_path(fixture_name):
 
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
-        get_fixture_path(('file1_nested.json')),
-        get_fixture_path(('file2_nested.json')),
+        get_fixture_path(('file1.json')),
+        get_fixture_path(('file2.json')),
         get_fixture_path(('result_stylish.txt')),
     ),
     (
-        get_fixture_path(('file1_nested.yaml')),
-        get_fixture_path(('file2_nested.yaml')),
+        get_fixture_path(('file1.yaml')),
+        get_fixture_path(('file2.yaml')),
         get_fixture_path(('result_stylish.txt')),
     ),
 ])
@@ -40,12 +40,12 @@ def test_generate_diff_default(first_file, second_file, expected_result):
 
 @pytest.mark.parametrize('first_file, second_file', [
     (
-        get_fixture_path(('file1_nested.json')),
-        get_fixture_path(('file2_nested.json')),
+        get_fixture_path(('file1.json')),
+        get_fixture_path(('file2.json')),
     ),
     (
-        get_fixture_path(('file1_nested.yaml')),
-        get_fixture_path(('file2_nested.yaml')),
+        get_fixture_path(('file1.yaml')),
+        get_fixture_path(('file2.yaml')),
     ),
 ])
 def test_generate_diff(first_file, second_file):
@@ -60,13 +60,13 @@ def test_generate_diff(first_file, second_file):
 
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
     (
-        get_fixture_path(('file1_nested.json')),
-        get_fixture_path(('file2_nested.json')),
+        get_fixture_path(('file1.json')),
+        get_fixture_path(('file2.json')),
         get_fixture_path(('result_json.json')),
     ),
     (
-        get_fixture_path(('file1_nested.yaml')),
-        get_fixture_path(('file2_nested.yaml')),
+        get_fixture_path(('file1.yaml')),
+        get_fixture_path(('file2.yaml')),
         get_fixture_path(('result_json.json')),
     )
 ])
