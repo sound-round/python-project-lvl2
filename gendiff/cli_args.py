@@ -13,7 +13,7 @@ def parse():
         choices=['stylish', 'plain', 'json'],
         help='set format of output (default: "stylish")',
     )
-    return parser
+    return parser.parse_args()
 
 
 def parse_file(file):

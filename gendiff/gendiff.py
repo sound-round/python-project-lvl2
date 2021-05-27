@@ -1,7 +1,7 @@
 """Main module of gendiff-utility"""
 
 
-from gendiff import parser
+from gendiff import cli_args
 from gendiff.formatters import formatters
 from gendiff import representation
 
@@ -14,8 +14,8 @@ def generate_diff(path_to_first_file,
     in different formats (stylish, plain, json).
 
     """
-    first_file_parser = parser.parse_file(path_to_first_file)
-    second_file_parser = parser.parse_file(path_to_second_file)
+    first_file_parser = cli_args.parse_file(path_to_first_file)
+    second_file_parser = cli_args.parse_file(path_to_second_file)
     first_file = first_file_parser(open(path_to_first_file))
     second_file = second_file_parser(open(path_to_second_file))
 

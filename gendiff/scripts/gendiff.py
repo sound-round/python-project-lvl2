@@ -2,12 +2,11 @@
 
 
 from gendiff import gendiff
-from gendiff.parser import parse
+from gendiff.cli_args import parse
 
 
 def main():
-    parser = parse()
-    args = parser.parse_args()
+    args = parse()
     diff = gendiff.generate_diff(args.first_file, args.second_file, args.format)
     print(diff)
 
