@@ -20,4 +20,4 @@ def generate_diff(first_file_path,
     second_file = second_file_parser(open(second_file_path))
 
     diff = tree.build_diff(first_file, second_file)
-    return formatters.map_formatters[format].format_diff(diff)
+    return formatters.format_diff(diff, format)
