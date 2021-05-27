@@ -37,7 +37,7 @@ def format_diff(diff):  # noqa: C901
                                          iter_(value, depth + 1)))
         else:
 
-            for string in sorted(diff, key=lambda string: string['key']):
+            for string in diff:
                 if string['type'] == 'nested':
                     lines.append('{}{} {}: {}'.format(
                         deep_indent, map_type_to_sign['nested'],

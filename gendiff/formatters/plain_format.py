@@ -23,7 +23,7 @@ def format_diff(diff):  # noqa: C901
 
     def walk(diff):
 
-        for node in sorted(diff, key=lambda node: node['key']):
+        for node in diff:
             if node['type'] == 'nested':
                 path.append(node['key'])
                 walk(node['children'])
@@ -54,6 +54,6 @@ def format_diff(diff):  # noqa: C901
                 )
                 path.pop()
 
-        return '\n'.join(sorted(lines))
+        return '\n'.join(lines)
 
     return walk(diff)

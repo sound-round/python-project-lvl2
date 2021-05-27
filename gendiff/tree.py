@@ -8,7 +8,7 @@ def build_diff(node1, node2):
     removed_keys = node1.keys() - node2.keys()
     added_keys = node2.keys() - node1.keys()
 
-    for key in all_keys:
+    for key in sorted(all_keys):
         if key in removed_keys:
             diff.append({
                 'key': key,
