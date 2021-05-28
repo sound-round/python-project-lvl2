@@ -1,5 +1,5 @@
 import json
 
 
-def format_diff(diff):  # noqa: C901
+def format_diff(diff):
     return json.dumps(diff, indent=4)

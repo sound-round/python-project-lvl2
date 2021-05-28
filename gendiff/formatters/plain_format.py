@@ -1,13 +1,13 @@
-from gendiff.formatters.map_bool import map_bool
+from gendiff.formatters.map_item_input_to_output import map_item_input_to_output
 
 
-def decode_value(value):
+def stringify(value):
     if str(value) == '0':
         return value
     if isinstance(value, dict):
         return '[complex value]'
-    if value in map_bool.keys():
-        return map_bool[value]
+    if value in map_item_input_to_output.keys():
+        return map_item_input_to_output[value]
     if isinstance(value, str):
         return "'{}'".format(value)
     return value
@@ -39,7 +39,7 @@ def format_diff(diff):  # noqa: C901
                 lines.append(
                     "Property '{}' was added with value: {}".format(
                         turn_path_to_str(path),
-                        decode_value(node['value'])
+                        stringify(node['value'])
                     )
                 )
                 path.pop()
@@ -48,8 +48,8 @@ def format_diff(diff):  # noqa: C901
                 lines.append(
                     "Property '{}' was updated. From {} to {}".format(
                         turn_path_to_str(path),
-                        decode_value(node['old_value']),
-                        decode_value(node['new_value'])
+                        stringify(node['old_value']),
+                        stringify(node['new_value'])
                     )
                 )
                 path.pop()
