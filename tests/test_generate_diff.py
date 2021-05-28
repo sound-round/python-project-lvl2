@@ -1,9 +1,11 @@
 from gendiff.generator import generate_diff
 import pytest
 import os
+import pathlib
 
 
 FORMATS = ['stylish', 'plain', 'json']
+FIXTURES_PATH = 'fixtures'
 
 
 def read(file_path):
@@ -13,10 +15,11 @@ def read(file_path):
 
 
 def get_fixture_path(fixture_name):
-    for root, _, files in os.walk(os.getcwd()):
-        for name in files:
-            if name == fixture_name:
-                return os.path.abspath(os.path.join(root, name))
+    return os.path.join(
+        pathlib.Path(__file__).absolute().parent,
+        FIXTURES_PATH,
+        fixture_name
+    )
 
 
 @pytest.mark.parametrize('first_file, second_file, expected_result', [
