@@ -1,4 +1,4 @@
-from gendiff.generator import generate_diff
+from gendiff.comparator import generate_diff
 import pytest
 import os
 import pathlib

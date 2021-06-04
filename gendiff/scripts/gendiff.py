@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 
 
-from gendiff import generator
+from gendiff import comparator
 from gendiff.cli_args import parse
 
 
 def main():
     args = parse()
-    diff = generator.generate_diff(
+    diff = comparator.generate_diff(
         args.first_file, args.second_file, args.format
     )
     print(diff)
