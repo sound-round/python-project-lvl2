@@ -12,16 +12,16 @@ def turn_path_to_str(path):
     return '.'.join(path)
 
 
-def format(diff):  # noqa: C901
+def format(data):  # noqa: C901
     lines = []
     path = []
 
-    def walk(diff):
+    def walk(tree, path):
 
-        for node in diff:
+        for node in tree:
             if node['type'] == 'nested':
                 path.append(node['key'])
-                walk(node['children'])
+                walk(node['children'], path)
                 path.pop()
 
             if node['type'] == 'removed':
@@ -51,7 +51,6 @@ def format(diff):  # noqa: C901
                     )
                 )
                 path.pop()
-
         return '\n'.join(lines)
 
-    return walk(diff)
+    return walk(data, path)
