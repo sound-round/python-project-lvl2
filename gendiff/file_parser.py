@@ -2,8 +2,12 @@ import json
 import yaml
 
 
-def parse_file(file, format):
+yaml_format = ['yaml', 'yml']
+
+
+def parse(file, format):
     if format == 'json':
         return json.load(file)
-    if format == 'yaml' or format == 'yml':
+    if format in yaml_format:
         return yaml.load(file, Loader=yaml.FullLoader)
+    raise ValueError('Unknown file format.')
