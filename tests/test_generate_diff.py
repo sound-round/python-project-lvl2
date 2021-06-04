@@ -22,33 +22,35 @@ def get_fixture_path(fixture_name):
     )
 
 
-@pytest.mark.parametrize('first_file, second_file, expected_result', [
+@pytest.mark.parametrize('first_file, second_file', [
     (
-        get_fixture_path(('file1.json')),
-        get_fixture_path(('file2.json')),
-        get_fixture_path(('result.stylish')),
+        get_fixture_path('file1.json'),
+        get_fixture_path('file2.json'),
     ),
     (
-        get_fixture_path(('file1.yaml')),
-        get_fixture_path(('file2.yaml')),
-        get_fixture_path(('result.stylish')),
+        get_fixture_path('file1.yaml'),
+        get_fixture_path('file2.yaml'),
     ),
 ])
-def test_generate_diff_default(first_file, second_file, expected_result):
+def test_generate_diff_default(first_file, second_file):
     assert generate_diff(
         first_file,
         second_file,
-    ) == read(expected_result)
+    ) == read(get_fixture_path('result.stylish'))
 
 
 @pytest.mark.parametrize('first_file, second_file', [
     (
-        get_fixture_path(('file1.json')),
-        get_fixture_path(('file2.json')),
+        get_fixture_path('file1.json'),
+        get_fixture_path('file2.json'),
     ),
     (
-        get_fixture_path(('file1.yaml')),
-        get_fixture_path(('file2.yaml')),
+        get_fixture_path('file1.yaml'),
+        get_fixture_path('file2.yaml'),
+    ),
+    (
+        get_fixture_path('file1.json'),
+        get_fixture_path('file2.yaml'),
     ),
 ])
 def test_generate_diff_formats(first_file, second_file):
