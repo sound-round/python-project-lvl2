@@ -28,4 +28,4 @@ def generate_diff(first_file_path,
     parsed_second_file = file_parser.parse(second_file_data, second_file_format)
 
     diff = tree.build_diff(parsed_first_file, parsed_second_file)
-    return formatters.format_diff(diff, format)
+    return formatters.format(diff, format)

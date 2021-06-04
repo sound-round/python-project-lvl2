@@ -17,7 +17,7 @@ def turn_path_to_str(path):
     return '.'.join(path)
 
 
-def format_diff(diff):  # noqa: C901
+def format(diff):  # noqa: C901
     lines = []
     path = []
 

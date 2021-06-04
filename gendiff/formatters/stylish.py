@@ -21,7 +21,7 @@ def stringify(value):
     return value
 
 
-def format_diff(diff):  # noqa: C901
+def format(diff):  # noqa: C901
     def iter_(diff, depth):
 
         current_indent = REPLACER * depth
