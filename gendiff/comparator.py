@@ -3,7 +3,6 @@
 
 from gendiff.formatters import formatters
 from gendiff import tree
-import pathlib
 from gendiff import file_parser
 import os
 
