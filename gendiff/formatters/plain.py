@@ -1,16 +1,11 @@
-from gendiff.formatters.map_item_input_to_output import map_item_input_to_output
-
-
 def stringify(value):
-    if str(value) == '0':
-        return value
     if isinstance(value, dict):
         return '[complex value]'
-    if value in map_item_input_to_output.keys():
-        return map_item_input_to_output[value]
+    if value is None:
+        return 'null'
     if isinstance(value, str):
-        return "'{}'".format(value)
-    return value
+        return f"'{value}'"
+    return str(value).lower()
 
 
 def turn_path_to_str(path):
@@ -28,13 +23,15 @@ def format(diff):  # noqa: C901
                 path.append(node['key'])
                 walk(node['children'])
                 path.pop()
-            elif node['type'] == 'removed':
+
+            if node['type'] == 'removed':
                 path.append(node['key'])
                 lines.append(
                     "Property '{}' was removed".format(turn_path_to_str(path))
                 )
                 path.pop()
-            elif node['type'] == 'added':
+
+            if node['type'] == 'added':
                 path.append(node['key'])
                 lines.append(
                     "Property '{}' was added with value: {}".format(
@@ -43,7 +40,8 @@ def format(diff):  # noqa: C901
                     )
                 )
                 path.pop()
-            elif node['type'] == 'changed':
+
+            if node['type'] == 'changed':
                 path.append(node['key'])
                 lines.append(
                     "Property '{}' was updated. From {} to {}".format(
