@@ -17,7 +17,7 @@ def build_diff(node1, node2):
             })
             continue
 
-        elif key in added_keys:
+        if key in added_keys:
             tree.append({
                 'key': key,
                 'type': 'added',
@@ -33,17 +33,19 @@ def build_diff(node1, node2):
                 'type': 'nested',
                 'children': build_diff(node1[key], node2[key]),
             })
-        elif node1[key] == node2[key]:
+            continue
+        if node1[key] == node2[key]:
             tree.append({
                 'key': key,
                 'type': 'unchanged',
                 'value': node1[key],
             })
-        else:
-            tree.append({
-                'key': key,
-                'type': 'changed',
-                'old_value': node1[key],
-                'new_value': node2[key],
-            })
+            continue
+
+        tree.append({
+            'key': key,
+            'type': 'changed',
+            'old_value': node1[key],
+            'new_value': node2[key],
+        })
     return tree
