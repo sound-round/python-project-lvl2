@@ -42,7 +42,8 @@ def format(data):  # noqa: C901
                         string['key'],
                         walk(string['children'], depth + 1)
                     ))
-                elif string['type'] == 'changed':
+                    continue
+                if string['type'] == 'changed':
                     lines.append('{}{} {}: {}'.format(
                         deep_indent,
                         map_type_to_sign['removed'],
@@ -61,16 +62,17 @@ def format(data):  # noqa: C901
                             depth + 1,
                         )
                     ))
-                else:
-                    lines.append('{}{} {}: {}'.format(
-                        deep_indent,
-                        map_type_to_sign[string['type']],
-                        string['key'],
-                        walk(
-                            stringify(string['value']),
-                            depth + 1
-                        )
-                    ))
+                    continue
+
+                lines.append('{}{} {}: {}'.format(
+                    deep_indent,
+                    map_type_to_sign[string['type']],
+                    string['key'],
+                    walk(
+                        stringify(string['value']),
+                        depth + 1
+                    )
+                ))
 
         formated_diff = itertools.chain("{", lines, [current_indent + "}"])
         return '\n'.join(formated_diff)
