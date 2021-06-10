@@ -26,16 +26,15 @@ def format(data):  # noqa: C901
         current_indent = REPLACER * depth
         deep_indent = (REPLACER * (depth + 1))[:-2]
         lines = []
-        if not isinstance(tree, list):
-            if not isinstance(tree, dict):
-                return str(tree)
+        if not isinstance(tree, list) and not isinstance(tree, dict):
+            return str(tree)
+        if isinstance(tree, dict):
             for key, value in tree.items():
                 lines.append(
                     '{}{} {}: {}'.format(deep_indent,
                                          map_type_to_sign['nested'], key,
                                          walk(value, depth + 1)))
         else:
-
             for string in tree:
                 if string['type'] == 'nested':
                     lines.append('{}{} {}: {}'.format(
