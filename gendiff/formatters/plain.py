@@ -22,11 +22,9 @@ def format(data):  # noqa: C901
     def walk(tree, path):
 
         for node in tree:
-            print(f'path:{path}')
             if node['type'] == 'nested':
                 new_path = copy.copy(path)
                 new_path.append(node['key'])
-                print(f'new_path:{new_path}')
                 walk(node['children'], new_path)
 
             if node['type'] == 'removed':
