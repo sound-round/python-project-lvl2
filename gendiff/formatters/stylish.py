@@ -1,5 +1,4 @@
 import itertools
-from gendiff.formatters.map_item_input_to_output import map_item_input_to_output
 
 
 REPLACER = '    '
@@ -14,9 +13,11 @@ map_type_to_sign = {
 def stringify(value):
     if isinstance(value, dict):
         return value
-    if value in map_item_input_to_output.keys():
-        return map_item_input_to_output[value]
-    return value
+    if value is None:
+        return 'null'
+    if isinstance(value, str):
+        return value
+    return str(value).lower()
 
 
 def format(data):  # noqa: C901
