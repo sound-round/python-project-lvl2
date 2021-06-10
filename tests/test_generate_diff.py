@@ -1,10 +1,10 @@
 from gendiff.comparator import generate_diff
-import pytest
 import os
 import pathlib
 
 
-FORMATS = ['stylish', 'plain', 'json']
+INPUT_FORMATS = ['json', 'yaml']
+OUTPUT_FORMATS = ['stylish', 'plain', 'json']
 FIXTURES_PATH = 'fixtures'
 
 
@@ -22,42 +22,36 @@ def get_fixture_path(fixture_name):
     )
 
 
-@pytest.mark.parametrize('first_file, second_file', [
-    (
-        get_fixture_path('file1.json'),
-        get_fixture_path('file2.json'),
-    ),
-    (
-        get_fixture_path('file1.yaml'),
-        get_fixture_path('file2.yaml'),
-    ),
-])
-def test_generate_diff_default(first_file, second_file):
-    assert generate_diff(
-        first_file,
-        second_file,
-    ) == read(get_fixture_path('result.stylish'))
-
-
-@pytest.mark.parametrize('first_file, second_file', [
-    (
-        get_fixture_path('file1.json'),
-        get_fixture_path('file2.json'),
-    ),
-    (
-        get_fixture_path('file1.yaml'),
-        get_fixture_path('file2.yaml'),
-    ),
-    (
-        get_fixture_path('file1.json'),
-        get_fixture_path('file2.yaml'),
-    ),
-])
-def test_generate_diff_formats(first_file, second_file):
-    for format in FORMATS:
-        expected_result = get_fixture_path('result.{}'.format(format))
+def test_generate_diff_default():
+    for input_format in INPUT_FORMATS:
+        first_file = get_fixture_path(f'file1.{input_format}')
+        second_file = get_fixture_path(f'file2.{input_format}')
         assert generate_diff(
             first_file,
             second_file,
-            format='{}'.format(format),
+        ) == read(get_fixture_path('result.stylish'))
+
+
+def test_generate_diff_formats():
+    for input_format in INPUT_FORMATS:
+        first_file = get_fixture_path(f'file1.{input_format}')
+        second_file = get_fixture_path(f'file2.{input_format}')
+        for output_format in OUTPUT_FORMATS:
+            expected_result = get_fixture_path(f'result.{output_format}')
+            assert generate_diff(
+                first_file,
+                second_file,
+                format=f'{output_format}',
+            ) == read(expected_result)
+
+
+def test_generate_diff_yaml_json():
+    first_file = get_fixture_path('file1.yaml')
+    second_file = get_fixture_path('file2.json')
+    for output_format in OUTPUT_FORMATS:
+        expected_result = get_fixture_path(f'result.{output_format}')
+        assert generate_diff(
+            first_file,
+            second_file,
+            format=f'{output_format}',
         ) == read(expected_result)
