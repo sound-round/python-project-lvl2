@@ -1,3 +1,6 @@
+import copy
+
+
 def stringify(value):
     if isinstance(value, dict):
         return '[complex value]'
@@ -19,38 +22,42 @@ def format(data):  # noqa: C901
     def walk(tree, path):
 
         for node in tree:
+            print(f'path:{path}')
             if node['type'] == 'nested':
-                path.append(node['key'])
-                walk(node['children'], path)
-                path.pop()
+                new_path = copy.copy(path)
+                new_path.append(node['key'])
+                print(f'new_path:{new_path}')
+                walk(node['children'], new_path)
 
             if node['type'] == 'removed':
-                path.append(node['key'])
+                new_path = copy.copy(path)
+                new_path.append(node['key'])
                 lines.append(
-                    "Property '{}' was removed".format(turn_path_to_str(path))
+                    "Property '{}' was removed".format(
+                        turn_path_to_str(new_path)
+                    )
                 )
-                path.pop()
 
             if node['type'] == 'added':
-                path.append(node['key'])
+                new_path = copy.copy(path)
+                new_path.append(node['key'])
                 lines.append(
                     "Property '{}' was added with value: {}".format(
-                        turn_path_to_str(path),
+                        turn_path_to_str(new_path),
                         stringify(node['value'])
                     )
                 )
-                path.pop()
 
             if node['type'] == 'changed':
-                path.append(node['key'])
+                new_path = copy.copy(path)
+                new_path.append(node['key'])
                 lines.append(
                     "Property '{}' was updated. From {} to {}".format(
-                        turn_path_to_str(path),
+                        turn_path_to_str(new_path),
                         stringify(node['old_value']),
                         stringify(node['new_value'])
                     )
                 )
-                path.pop()
         return '\n'.join(lines)
 
     return walk(data, path)
