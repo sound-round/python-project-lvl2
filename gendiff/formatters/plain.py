@@ -1,6 +1,3 @@
-import copy
-
-
 def stringify(value):
     if isinstance(value, dict):
         return '[complex value]'
@@ -15,21 +12,19 @@ def turn_path_to_str(path):
     return '.'.join(path)
 
 
-def format(data):  # noqa: C901
+def format(node):  # noqa: C901
     lines = []
     path = []
 
     def walk(tree, path):
 
         for node in tree:
+            new_path = path.copy()
+            new_path.append(node['key'])
             if node['type'] == 'nested':
-                new_path = copy.copy(path)
-                new_path.append(node['key'])
                 walk(node['children'], new_path)
 
             if node['type'] == 'removed':
-                new_path = copy.copy(path)
-                new_path.append(node['key'])
                 lines.append(
                     "Property '{}' was removed".format(
                         turn_path_to_str(new_path)
@@ -37,8 +32,6 @@ def format(data):  # noqa: C901
                 )
 
             if node['type'] == 'added':
-                new_path = copy.copy(path)
-                new_path.append(node['key'])
                 lines.append(
                     "Property '{}' was added with value: {}".format(
                         turn_path_to_str(new_path),
@@ -47,8 +40,6 @@ def format(data):  # noqa: C901
                 )
 
             if node['type'] == 'changed':
-                new_path = copy.copy(path)
-                new_path.append(node['key'])
                 lines.append(
                     "Property '{}' was updated. From {} to {}".format(
                         turn_path_to_str(new_path),
@@ -58,4 +49,4 @@ def format(data):  # noqa: C901
                 )
         return '\n'.join(lines)
 
-    return walk(data, path)
+    return walk(node, path)
