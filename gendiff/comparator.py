@@ -7,7 +7,7 @@ from gendiff import file_parser
 import os
 
 
-def get_format_file(path):
+def get_file_format(path):
     return os.path.splitext(path)[1][1:]
 
 
@@ -21,8 +21,8 @@ def generate_diff(first_file_path,
     """
     first_file_data = open(first_file_path)
     second_file_data = open(second_file_path)
-    first_file_format = get_format_file(first_file_path)
-    second_file_format = get_format_file(second_file_path)
+    first_file_format = get_file_format(first_file_path)
+    second_file_format = get_file_format(second_file_path)
     parsed_first_file = file_parser.parse(first_file_data, first_file_format)
     parsed_second_file = file_parser.parse(second_file_data, second_file_format)
 
