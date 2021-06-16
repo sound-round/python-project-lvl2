@@ -1,7 +1,8 @@
 import itertools
 
-
+CR = '\n'
 REPLACER = '    '
+HALF_REPLACER = '  '
 map_type_to_sign = {
     'unchanged': ' ',
     'nested': ' ',
@@ -13,17 +14,21 @@ map_type_to_sign = {
 def stringify(tree, depth):
 
     if isinstance(tree, dict):
-        indent = (REPLACER * (depth + 1))[:-2]
-        res = []
+        current_indent = REPLACER * depth
+        deep_indent = current_indent + HALF_REPLACER
+
+        formatted_value = []
         for key, value in tree.items():
-            res.append(
+            formatted_value.append(
                 '{}  {}: {}'.format(
-                    indent,
+                    deep_indent,
                     key,
                     stringify(value, depth + 1),
                 )
             )
-        return '{{{}}}'.format('\n' + '\n'.join(res) + '\n' + indent[:-2])
+        return '{{{}}}'.format(
+            CR + CR.join(formatted_value) + CR + current_indent
+        )
     if tree is None:
         return 'null'
     if isinstance(tree, str):
@@ -31,10 +36,11 @@ def stringify(tree, depth):
     return str(tree).lower()
 
 
-def format(data):  # noqa: C901
-    def walk(tree, depth):
+def format(data):
 
-        deep_indent = (REPLACER * (depth + 1))[:-2]
+    def walk(tree, depth):
+        current_indent = REPLACER * depth
+        deep_indent = current_indent + HALF_REPLACER
         lines = []
         if not isinstance(tree, list) and not isinstance(tree, dict):
             return str(tree)
@@ -77,8 +83,8 @@ def format(data):  # noqa: C901
                     depth + 1
                 )
             ))
-        current_indent = REPLACER * depth
+
         formated_diff = itertools.chain("{", lines, [current_indent + "}"])
-        return '\n'.join(formated_diff)
+        return CR.join(formated_diff)
 
     return walk(data, 0)
