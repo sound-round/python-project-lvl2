@@ -19,8 +19,8 @@ def format(node):  # noqa: C901
     def walk(tree, path):
 
         for node in tree:
-            new_path = path.copy()
-            new_path.append(node['key'])
+
+            new_path = [*path, node['key']]
             if node['type'] == 'nested':
                 walk(node['children'], new_path)
 
