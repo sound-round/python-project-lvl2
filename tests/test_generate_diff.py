@@ -24,8 +24,8 @@ def get_fixture_path(fixture_name):
 
 
 @pytest.mark.parametrize('input_format', [
-        'json',
-        'yaml',
+    'json',
+    'yaml',
 ])
 def test_generate_diff_default(input_format):
     first_file = get_fixture_path(f'file1.{input_format}')
@@ -37,8 +37,8 @@ def test_generate_diff_default(input_format):
 
 
 @pytest.mark.parametrize('input_format', [
-        'json',
-        'yaml',
+    'json',
+    'yaml',
 ])
 def test_generate_diff_formats(input_format):
     first_file = get_fixture_path(f'file1.{input_format}')
