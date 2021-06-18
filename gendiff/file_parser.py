@@ -2,6 +2,9 @@ import json
 import yaml
 
 
+INPUT_FORMATS = ['json', 'yaml']
+
+
 def parse(file, format):
     if format == 'json':
         return json.load(file)
@@ -9,5 +12,5 @@ def parse(file, format):
         return yaml.load(file, Loader=yaml.FullLoader)
     raise ValueError(
         f'Unknown input format: {format}. '
-        'Choose from "yaml", "json".'
+        f'Choose from {", ".join(INPUT_FORMATS)}.'
     )
