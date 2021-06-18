@@ -1,6 +1,6 @@
 import itertools
 
-CR = '\n'
+
 REPLACER = '    '
 HALF_REPLACER = '  '
 map_type_to_sign = {
@@ -14,12 +14,12 @@ map_type_to_sign = {
 def stringify(tree, depth):
 
     if isinstance(tree, dict):
-        current_indent = REPLACER * depth
+        current_indent = REPLACER * (depth + 1)
         deep_indent = current_indent + HALF_REPLACER
 
-        formatted_value = []
+        formatted_values = []
         for key, value in tree.items():
-            formatted_value.append(
+            formatted_values.append(
                 '{}  {}: {}'.format(
                     deep_indent,
                     key,
@@ -27,7 +27,7 @@ def stringify(tree, depth):
                 )
             )
         return '{{{}}}'.format(
-            CR + CR.join(formatted_value) + CR + current_indent
+            '\n' + '\n'.join(formatted_values) + '\n' + current_indent
         )
     if tree is None:
         return 'null'
@@ -36,7 +36,7 @@ def stringify(tree, depth):
     return str(tree).lower()
 
 
-def format(data):
+def format(nodes):
 
     def walk(tree, depth):
         current_indent = REPLACER * depth
@@ -60,7 +60,7 @@ def format(data):
 
                     stringify(
                         node['old_value'],
-                        depth + 1,
+                        depth,
                     )
                 ))
                 lines.append('{}{} {}: {}'.format(
@@ -69,7 +69,7 @@ def format(data):
                     node['key'],
                     stringify(
                         node['new_value'],
-                        depth + 1,
+                        depth,
                     )
                 ))
                 continue
@@ -80,11 +80,11 @@ def format(data):
                 node['key'],
                 stringify(
                     node['value'],
-                    depth + 1
+                    depth,
                 )
             ))
 
         formated_diff = itertools.chain("{", lines, [current_indent + "}"])
-        return CR.join(formated_diff)
+        return '\n'.join(formated_diff)
 
-    return walk(data, 0)
+    return walk(nodes, 0)
