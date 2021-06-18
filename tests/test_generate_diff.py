@@ -23,42 +23,36 @@ def get_fixture_path(fixture_name):
     )
 
 
-@pytest.mark.parametrize('input_format', [
-    'json',
-    'yaml',
-])
+@pytest.mark.parametrize('input_format', INPUT_FORMATS)
 def test_generate_diff_default(input_format):
-    first_file = get_fixture_path(f'file1.{input_format}')
-    second_file = get_fixture_path(f'file2.{input_format}')
+    first_file_path = get_fixture_path(f'file1.{input_format}')
+    second_file_path = get_fixture_path(f'file2.{input_format}')
     assert generate_diff(
-        first_file,
-        second_file,
+        first_file_path,
+        second_file_path,
     ) == read(get_fixture_path('result.stylish'))
 
 
-@pytest.mark.parametrize('input_format', [
-    'json',
-    'yaml',
-])
+@pytest.mark.parametrize('input_format', INPUT_FORMATS)
 def test_generate_diff_formats(input_format):
-    first_file = get_fixture_path(f'file1.{input_format}')
-    second_file = get_fixture_path(f'file2.{input_format}')
+    first_file_path = get_fixture_path(f'file1.{input_format}')
+    second_file_path = get_fixture_path(f'file2.{input_format}')
     for output_format in OUTPUT_FORMATS:
-        expected_result = get_fixture_path(f'result.{output_format}')
+        expected_result_path = get_fixture_path(f'result.{output_format}')
         assert generate_diff(
-            first_file,
-            second_file,
-            format=f'{output_format}',
-        ) == read(expected_result)
+            first_file_path,
+            second_file_path,
+            format=output_format,
+        ) == read(expected_result_path)
 
 
 def test_generate_diff_different_formats():
-    first_file = get_fixture_path('file1.yaml')
-    second_file = get_fixture_path('file2.json')
+    first_file_path = get_fixture_path('file1.yaml')
+    second_file_path = get_fixture_path('file2.json')
     for output_format in OUTPUT_FORMATS:
-        expected_result = get_fixture_path(f'result.{output_format}')
+        expected_result_path = get_fixture_path(f'result.{output_format}')
         assert generate_diff(
-            first_file,
-            second_file,
-            format=f'{output_format}',
-        ) == read(expected_result)
+            first_file_path,
+            second_file_path,
+            format=output_format,
+        ) == read(expected_result_path)
