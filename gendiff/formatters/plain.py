@@ -1,6 +1,3 @@
-CR = '\n'
-
-
 def stringify(value):
     if isinstance(value, dict):
         return '[complex value]'
@@ -50,6 +47,6 @@ def format(node):  # noqa: C901
                         stringify(node['new_value'])
                     )
                 )
-        return CR.join(lines)
+        return '\n'.join(lines)
 
     return walk(node, path)
