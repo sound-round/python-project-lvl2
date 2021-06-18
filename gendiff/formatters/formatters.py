@@ -1,6 +1,9 @@
 from gendiff.formatters import stylish, plain, json
 
 
+OUTPUT_FORMATS = ['stylish', 'plain', 'json']
+
+
 def format(data, format):
     if format == 'stylish':
         return stylish.format(data)
@@ -10,5 +13,5 @@ def format(data, format):
         return json.format(data)
     raise ValueError(
         f'Unknown output format: {format}. '
-        'Choose from "stylish", "plain", "json".'
+        f'Choose from {", ".join(OUTPUT_FORMATS)}.'
     )
