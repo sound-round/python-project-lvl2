@@ -12,7 +12,7 @@ def turn_path_to_str(path):
     return '.'.join(path)
 
 
-def format(node):  # noqa: C901
+def format(nodes):  # noqa: C901
     lines = []
     path = []
 
@@ -49,4 +49,4 @@ def format(node):  # noqa: C901
                 )
         return '\n'.join(lines)
 
-    return walk(node, path)
+    return walk(nodes, path)
