@@ -9,9 +9,9 @@ map_type_to_sign = {
 }
 
 
-def get_indent(depth, replacer=' ', indent=4, offset=0):
-    indent_size = depth * indent
-    return replacer * indent_size + (replacer * offset)
+def get_indent(depth, indent_type=' ', indent_size=4, offset=0):
+    current_indent_size = depth * indent_size
+    return indent_type * current_indent_size + (indent_type * offset)
 
 
 def stringify(tree, depth):
@@ -86,7 +86,7 @@ def format(nodes):
                 )
             ))
 
-        formated_diff = itertools.chain("{", lines, [brace_indent + "}"])
-        return '\n'.join(formated_diff)
+        formatted_diff = itertools.chain("{", lines, [brace_indent + "}"])
+        return '\n'.join(formatted_diff)
 
     return walk(nodes, 0)
