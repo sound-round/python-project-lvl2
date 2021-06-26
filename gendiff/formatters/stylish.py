@@ -38,55 +38,55 @@ def stringify(tree, depth):
     return str(tree).lower()
 
 
-def format(nodes):
-
-    def walk(tree, depth):
-        brace_indent = get_indent(depth)
-        deep_indent = get_indent(depth, offset=2)
-        lines = []
-        if not isinstance(tree, list) and not isinstance(tree, dict):
-            return str(tree)
-        for node in tree:
-            if node['type'] == 'nested':
-                lines.append('{}{} {}: {}'.format(
-                    deep_indent, map_type_to_sign['nested'],
-                    node['key'],
-                    walk(node['children'], depth + 1)
-                ))
-                continue
-            if node['type'] == 'changed':
-                lines.append('{}{} {}: {}'.format(
-                    deep_indent,
-                    map_type_to_sign['removed'],
-                    node['key'],
-
-                    stringify(
-                        node['old_value'],
-                        depth,
-                    )
-                ))
-                lines.append('{}{} {}: {}'.format(
-                    deep_indent,
-                    map_type_to_sign['added'],
-                    node['key'],
-                    stringify(
-                        node['new_value'],
-                        depth,
-                    )
-                ))
-                continue
-
+def walk(tree, depth):
+    brace_indent = get_indent(depth)
+    deep_indent = get_indent(depth, offset=2)
+    lines = []
+    if not isinstance(tree, list) and not isinstance(tree, dict):
+        return str(tree)
+    for node in tree:
+        if node['type'] == 'nested':
+            lines.append('{}{} {}: {}'.format(
+                deep_indent, map_type_to_sign['nested'],
+                node['key'],
+                walk(node['children'], depth + 1)
+            ))
+            continue
+        if node['type'] == 'changed':
             lines.append('{}{} {}: {}'.format(
                 deep_indent,
-                map_type_to_sign[node['type']],
+                map_type_to_sign['removed'],
                 node['key'],
+
                 stringify(
-                    node['value'],
+                    node['old_value'],
                     depth,
                 )
             ))
+            lines.append('{}{} {}: {}'.format(
+                deep_indent,
+                map_type_to_sign['added'],
+                node['key'],
+                stringify(
+                    node['new_value'],
+                    depth,
+                )
+            ))
+            continue
 
-        formatted_diff = itertools.chain("{", lines, [brace_indent + "}"])
-        return '\n'.join(formatted_diff)
+        lines.append('{}{} {}: {}'.format(
+            deep_indent,
+            map_type_to_sign[node['type']],
+            node['key'],
+            stringify(
+                node['value'],
+                depth,
+            )
+        ))
 
+    formatted_diff = itertools.chain("{", lines, [brace_indent + "}"])
+    return '\n'.join(formatted_diff)
+
+
+def format(nodes):
     return walk(nodes, 0)
