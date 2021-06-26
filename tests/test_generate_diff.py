@@ -2,10 +2,10 @@ from gendiff.comparator import generate_diff
 import os
 import pathlib
 import pytest
-from gendiff.file_parser import INPUT_FORMATS
-from gendiff.formatters.formatters import OUTPUT_FORMATS
 
 
+INPUT_FORMATS = ['json', 'yaml']
+OUTPUT_FORMATS = ['stylish', 'plain', 'json']
 FIXTURES_PATH = 'fixtures'
 
 
